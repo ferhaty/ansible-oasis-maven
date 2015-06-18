@@ -2,4 +2,4 @@
 # tasks file for oasis-maven
 
 - name: run oasis installer
-  script: files/install_oasis.ps1
+  script: install_oasis.ps1

@@ -1,5 +1,26 @@
 ---
 # tasks file for oasis-maven
 
-- name: run oasis installer
-  script: install_oasis.ps1
+- name: install powershell4
+  script: chocolatey.ps1 powershell4
+
+- name: install notepadplusplus.install
+  script: chocolatey.ps1 notepadplusplus.install
+
+- name: install git
+  script: chocolatey.ps1 git
+
+- name: install firefox
+  script: chocolatey.ps1 firefox
+
+- name: install vcredist2010
+  script: chocolatey.ps1 vcredist2010
+
+- name: install jdk7
+  script: chocolatey.ps1 jdk7
+
+- name: install maven
+  script: chocolatey.ps1 maven
+
+- name: install eclipse
+  script: chocolatey.ps1 eclipse

@@ -10,14 +10,14 @@ $adminRole=[System.Security.Principal.WindowsBuiltInRole]::Administrator
 # Check to see if we are currently running "as Administrator"
 if ($myWindowsPrincipal.IsInRole($adminRole))
    {
-   # We are running "as Administrator" - so change the title and background color to indicate this
+   Write-Output "We are running as Administrator - so change the title and background color to indicate this"
    $Host.UI.RawUI.WindowTitle = $myInvocation.MyCommand.Definition + "(Elevated)"
    $Host.UI.RawUI.BackgroundColor = "DarkBlue"
    clear-host
    }
 else
    {
-   # We are not running "as Administrator" - so relaunch as administrator
+   Write-Output "We are not running as Administrator - so relaunch as administrator"
    
    # Create a new process object that starts PowerShell
    $newProcess = new-object System.Diagnostics.ProcessStartInfo "PowerShell";
@@ -36,7 +36,9 @@ else
    }
  
  $package = $args[0]
- & choco install $package -y -force
+ & elevate -c -w choco install $package -force -y
+
+
 
 
 

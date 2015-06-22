@@ -1,6 +1,9 @@
 ---
 # tasks file for oasis-maven
 
+- name: install elevate.native
+  script: install_elevate.ps1
+
 - name: install powershell4
   script: chocolatey.ps1 powershell4
 
@@ -24,3 +27,9 @@
 
 - name: install eclipse
   script: chocolatey.ps1 eclipse
+
+- name: clone git repository
+  script: clone_repository.ps1
+
+- name: maven update
+  script: maven_update.ps1

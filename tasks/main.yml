@@ -4,9 +4,6 @@
 - name: install elevate.native
   script: install_elevate.ps1
 
-- name: install powershell4
-  script: chocolatey.ps1 powershell4
-
 - name: install notepadplusplus.install
   script: chocolatey.ps1 notepadplusplus.install
 
@@ -27,6 +24,20 @@
 
 - name: install eclipse
   script: chocolatey.ps1 eclipse
+
+- name: install powershell4
+  script: chocolatey.ps1 powershell4
+
+- name: restart machine
+  script: restart.ps1
+
+- name: wait for machine to restart
+  local_action:
+    module: wait_for
+      host=192.168.10.40
+      port=5985
+      delay=10
+      timeout=300
 
 - name: clone git repository
   script: clone_repository.ps1

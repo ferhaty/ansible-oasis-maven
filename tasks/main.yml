@@ -34,7 +34,7 @@
 - name: wait for machine to restart
   local_action:
     module: wait_for
-      host=192.168.10.40
+      host={{ inventory_hostname }}
       port=5985
       delay=10
       timeout=300

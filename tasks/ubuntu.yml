@@ -1,0 +1,31 @@
+
+    - name: 'update apt cache'
+      apt: update_cache=yes cache_valid_time=86400
+
+    - name: 'install ubuntu-desktop (GUI)'
+      apt: install_recommends=no name=ubuntu-desktop state=present
+
+    - name: 'remove guest login'
+      lineinfile: dest=/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf regexp='^allow-guest'
+              line='allow-guest=false'
+              state=present
+
+    - name: 'install ubuntu stuff'
+      apt: name={{ item }} state=present
+      with_items:
+        - firefox
+        - virtualbox-guest-dkms
+        - git
+
+    - name: 'checkout fork of OASIS until PR11 is merged'
+      sudo: no
+      git: dest=/home/vagrant/OASIS
+           repo=https://github.com/bbaassssiiee/OASIS-Maven.git
+
+    - name: 'mvn install files for OASIS'
+      sudo: no
+      shell: "(cd /home/vagrant/OASIS && bash ./install.sh)"
+
+    - name: 'reboot system if required'
+      command: shutdown -r now 'Rebooting to complete system upgrade'
+               removes=/var/run/reboot-required

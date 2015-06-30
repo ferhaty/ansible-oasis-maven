@@ -1,0 +1,46 @@
+---
+# tasks file for oasis-maven
+
+- name: install elevate.native
+  script: install_elevate.ps1
+
+- name: install notepadplusplus.install
+  script: chocolatey.ps1 notepadplusplus.install
+
+- name: install git
+  script: chocolatey.ps1 git
+
+- name: install firefox
+  script: chocolatey.ps1 firefox
+
+- name: install vcredist2010
+  script: chocolatey.ps1 vcredist2010
+
+- name: install jdk7
+  script: chocolatey.ps1 jdk7
+
+- name: install maven
+  script: chocolatey.ps1 maven
+
+- name: install eclipse
+  script: chocolatey.ps1 eclipse
+
+- name: install powershell4
+  script: chocolatey.ps1 powershell4
+
+- name: restart machine
+  script: restart.ps1
+
+- name: wait for machine to restart
+  local_action:
+    module: wait_for
+      host={{ inventory_hostname }}
+      port=5985
+      delay=10
+      timeout=300
+
+- name: clone git repository
+  script: clone_repository.ps1
+
+- name: maven update
+  script: maven_update.ps1

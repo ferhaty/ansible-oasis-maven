@@ -1,5 +1,5 @@
 - include: windows.yml
-  when: ansible_os_family == 'Windows'
+  when: inventory_hostname in groups.windows
 
 - include: ubuntu.yml
   when: ansible_os_family == 'Debian'
